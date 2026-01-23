@@ -72,21 +72,25 @@ body {
     padding: 0 !important;
 }
 
-/* Template Editor Row - Flexbox Layout */
+/* Template Editor Row - Fixed Height Layout */
 #template-panel .row.g-0 {
     display: flex;
     flex-wrap: nowrap;
     margin: 0;
     width: 100%;
-    min-height: calc(100vh - 250px);
+    height: 800px;
+    max-height: 800px;
+    overflow: hidden;
 }
 
 #template-panel .row.g-0 > .col-md-6 {
-    flex: 1;
+    width: 50%;
     min-width: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
+    height: 800px;
+    max-height: 800px;
 }
 
 /* Editor Section */
@@ -100,7 +104,8 @@ body {
     padding: 1rem 1.5rem !important;
     background-color: #2d2d2d;
     border-bottom: 1px solid #3e3e3e;
-    flex-shrink: 0;
+    height: 60px;
+    max-height: 60px;
 }
 
 .col-md-6.border-end .p-3 h6,
@@ -113,30 +118,32 @@ body {
     border-bottom: 1px solid #dee2e6;
 }
 
-/* CodeMirror Editor - Dynamic Height */
+/* CodeMirror Editor - Fixed Height with Internal Scrolling */
 .CodeMirror {
-    height: 100% !important;
-    min-height: 600px;
+    height: 740px !important;
+    max-height: 740px !important;
     font-size: 14px;
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
     line-height: 1.5;
     border: none;
     border-radius: 0;
-    flex: 1;
+    overflow-y: auto !important;
 }
 
 .CodeMirror-scroll {
-    min-height: 600px;
+    height: 740px !important;
+    max-height: 740px !important;
+    overflow-y: auto !important;
 }
 
-/* Template Preview - Dynamic Height */
+/* Template Preview - Fixed Height with Internal Scrolling */
 #template-preview {
     background-color: #ffffff;
     overflow-y: auto;
     overflow-x: hidden;
     padding: 2rem;
-    flex: 1;
-    min-height: 600px;
+    height: 740px;
+    max-height: 740px;
 }
 
 /* Email Preview Content - Centered */
@@ -366,14 +373,17 @@ body {
         padding-right: 50px;
     }
 
-    #template-panel .row.g-0 {
-        min-height: calc(100vh - 220px);
+    #template-panel .row.g-0,
+    #template-panel .row.g-0 > .col-md-6 {
+        height: 900px;
+        max-height: 900px;
     }
 
     .CodeMirror,
     .CodeMirror-scroll,
     #template-preview {
-        min-height: 700px;
+        height: 840px !important;
+        max-height: 840px !important;
     }
 }
 
@@ -392,13 +402,17 @@ body {
         padding-right: 25px;
     }
 
-    .CodeMirror,
-    .CodeMirror-scroll {
-        min-height: 550px;
+    #template-panel .row.g-0,
+    #template-panel .row.g-0 > .col-md-6 {
+        height: 700px;
+        max-height: 700px;
     }
 
+    .CodeMirror,
+    .CodeMirror-scroll,
     #template-preview {
-        min-height: 550px;
+        height: 640px !important;
+        max-height: 640px !important;
     }
 }
 
@@ -406,13 +420,15 @@ body {
 @media (max-width: 991px) {
     #template-panel .row.g-0 {
         flex-wrap: wrap;
-        min-height: auto;
+        height: auto;
+        max-height: none;
     }
 
     #template-panel .row.g-0 > .col-md-6 {
-        flex: 0 0 100%;
+        width: 100%;
         max-width: 100%;
-        min-height: 500px;
+        height: 600px;
+        max-height: 600px;
     }
 
     .col-md-6.border-end {
@@ -421,12 +437,10 @@ body {
     }
 
     .CodeMirror,
-    .CodeMirror-scroll {
-        min-height: 500px;
-    }
-
+    .CodeMirror-scroll,
     #template-preview {
-        min-height: 500px;
+        height: 540px !important;
+        max-height: 540px !important;
     }
 }
 
@@ -450,14 +464,21 @@ body {
         padding: 1rem;
     }
 
+    #template-panel .row.g-0 > .col-md-6 {
+        height: 500px;
+        max-height: 500px;
+    }
+
     .CodeMirror,
     .CodeMirror-scroll {
-        min-height: 400px;
+        height: 440px !important;
+        max-height: 440px !important;
         font-size: 12px;
     }
 
     #template-preview {
-        min-height: 400px;
+        height: 440px !important;
+        max-height: 440px !important;
         padding: 1rem;
     }
 

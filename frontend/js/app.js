@@ -6,10 +6,17 @@
 const app = {
     // API base URL
     apiUrl: '/api',
+    initialized: false,
 
     // Initialize application
     async init() {
+        if (this.initialized) {
+            console.log('Application already initialized, skipping...');
+            return;
+        }
+
         console.log('Initializing CSV Email Tool...');
+        this.initialized = true;
 
         // Initialize all modules
         csvEditor.init();

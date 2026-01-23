@@ -1,4 +1,4 @@
-/* CSV Email Tool - Custom Styles */
+/* CSV Email Tool - Custom Styles - FULLY RESPONSIVE */
 
 :root {
     --primary-color: #0d6efd;
@@ -8,37 +8,142 @@
     --info-color: #0dcaf0;
 }
 
+* {
+    box-sizing: border-box;
+}
+
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f8f9fa;
     overflow-x: hidden;
+    margin: 0;
+    padding: 0;
 }
 
-/* Main Container - Full Width */
+/* Main Container - Truly Full Width */
 .container-fluid {
     max-width: 100%;
-    padding-left: 20px;
-    padding-right: 20px;
+    width: 100%;
+    padding-left: 30px;
+    padding-right: 30px;
+    margin: 0;
+}
+
+/* Navbar - Full Width */
+.navbar {
+    padding: 1rem 2rem;
 }
 
 /* Tab Content - Full Width */
 .tab-content {
     width: 100%;
+    margin-top: 1.5rem;
 }
 
-/* Card Body - Better Spacing */
+.tab-pane {
+    width: 100%;
+}
+
+/* Cards - Full Width */
+.card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1.5rem;
+    width: 100%;
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: 2px solid #f8f9fa;
+    font-weight: 600;
+    padding: 1.25rem 1.5rem;
+}
+
 .card-body {
     padding: 1.5rem;
 }
 
-/* Template Editor Row - Full Width */
-.row.g-0 {
-    margin: 0;
-    width: 100%;
+/* Template Tab - Zero Padding */
+#template-panel .card {
+    margin-bottom: 0;
 }
 
-.row.g-0 > [class*='col-'] {
+#template-panel .card-body {
+    padding: 0 !important;
+}
+
+/* Template Editor Row - Flexbox Layout */
+#template-panel .row.g-0 {
+    display: flex;
+    flex-wrap: nowrap;
+    margin: 0;
+    width: 100%;
+    min-height: calc(100vh - 250px);
+}
+
+#template-panel .row.g-0 > .col-md-6 {
+    flex: 1;
+    min-width: 0;
     padding: 0;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Editor Section */
+.col-md-6.border-end {
+    border-right: 2px solid #dee2e6 !important;
+    background-color: #1e1e1e;
+}
+
+/* Section Headers */
+.col-md-6 .p-3 {
+    padding: 1rem 1.5rem !important;
+    background-color: #2d2d2d;
+    border-bottom: 1px solid #3e3e3e;
+    flex-shrink: 0;
+}
+
+.col-md-6.border-end .p-3 h6,
+.col-md-6.border-end .p-3 small {
+    color: #ffffff;
+}
+
+.col-md-6:not(.border-end) .p-3 {
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* CodeMirror Editor - Dynamic Height */
+.CodeMirror {
+    height: 100% !important;
+    min-height: 600px;
+    font-size: 14px;
+    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
+    line-height: 1.5;
+    border: none;
+    border-radius: 0;
+    flex: 1;
+}
+
+.CodeMirror-scroll {
+    min-height: 600px;
+}
+
+/* Template Preview - Dynamic Height */
+#template-preview {
+    background-color: #ffffff;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 2rem;
+    flex: 1;
+    min-height: 600px;
+}
+
+/* Email Preview Content - Centered */
+#template-preview .email-container,
+#email-preview .email-body {
+    max-width: 650px;
+    margin: 0 auto;
 }
 
 /* Upload Area */
@@ -48,6 +153,8 @@ body {
     cursor: pointer;
     transition: all 0.3s ease;
     background-color: #f8f9fa;
+    padding: 3rem;
+    margin: 2rem 0;
 }
 
 .upload-area:hover {
@@ -60,10 +167,11 @@ body {
     background-color: #d1e7dd;
 }
 
-/* CSV Table */
+/* CSV Table - Full Width */
 #csv-grid {
-    min-height: 400px;
+    min-height: 500px;
     width: 100%;
+    margin-top: 1rem;
 }
 
 .tabulator {
@@ -72,40 +180,30 @@ body {
 }
 
 .tabulator-cell {
-    padding: 8px;
+    padding: 10px 12px;
 }
 
-/* CodeMirror Editor - Better Sizing */
-.CodeMirror {
-    height: 700px !important;
-    font-size: 13px;
-    border: 1px solid #dee2e6;
-    border-radius: 0;
-    width: 100%;
-}
-
-/* Template Preview - Better Sizing */
-#template-preview {
-    background-color: #fff;
-    min-height: 700px !important;
-    max-height: 700px !important;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding: 20px;
+.tabulator-header {
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #dee2e6;
 }
 
 /* Email Preview */
 #email-preview {
     background-color: #fff;
     min-height: 600px;
-    max-height: 600px;
+    max-height: calc(100vh - 300px);
     overflow-y: auto;
+    padding: 1.5rem;
 }
 
 /* Email List Items */
 .email-list-item {
     cursor: pointer;
     transition: all 0.2s ease;
+    padding: 1rem;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
 }
 
 .email-list-item:hover {
@@ -119,6 +217,64 @@ body {
 
 .email-list-item.active * {
     color: white !important;
+}
+
+/* Configuration Form */
+.form-label {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+    color: #495057;
+}
+
+.form-control {
+    padding: 0.75rem;
+    font-size: 14px;
+}
+
+/* Tabs - Better Spacing */
+.nav-tabs {
+    border-bottom: 2px solid #dee2e6;
+    margin-bottom: 0;
+}
+
+.nav-tabs .nav-link {
+    color: #6c757d;
+    border: none;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    padding: 1rem 1.5rem;
+    font-weight: 500;
+}
+
+.nav-tabs .nav-link:hover {
+    border-bottom-color: #dee2e6;
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+    background-color: transparent;
+}
+
+/* Buttons - Better Styling */
+.btn {
+    transition: all 0.2s ease;
+    padding: 0.6rem 1.2rem;
+    font-weight: 500;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-lg {
+    padding: 0.8rem 2rem;
+    font-size: 1.1rem;
 }
 
 /* Progress Bar */
@@ -137,64 +293,43 @@ body {
     }
 }
 
-/* Cards */
-.card {
-    border: none;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1rem;
-    width: 100%;
+/* Validation Messages */
+.validation-error {
+    color: var(--danger-color);
+    padding: 1rem;
+    border-left: 4px solid var(--danger-color);
+    background-color: #f8d7da;
+    margin-bottom: 0.75rem;
+    border-radius: 4px;
 }
 
-.card-header {
-    background-color: #fff;
-    border-bottom: 2px solid #f8f9fa;
-    font-weight: 600;
+.validation-warning {
+    color: #856404;
+    padding: 1rem;
+    border-left: 4px solid var(--warning-color);
+    background-color: #fff3cd;
+    margin-bottom: 0.75rem;
+    border-radius: 4px;
 }
 
-/* Card Body - No Padding for Template Tab */
-#template-panel .card-body {
-    padding: 0 !important;
+.validation-success {
+    color: var(--success-color);
+    padding: 1rem;
+    border-left: 4px solid var(--success-color);
+    background-color: #d1e7dd;
+    margin-bottom: 0.75rem;
+    border-radius: 4px;
 }
 
-/* Tabs */
-.nav-tabs {
-    border-bottom: 2px solid #dee2e6;
-}
-
-.nav-tabs .nav-link {
-    color: #6c757d;
-    border: none;
-    border-bottom: 3px solid transparent;
-    transition: all 0.3s ease;
-}
-
-.nav-tabs .nav-link:hover {
-    border-bottom-color: #dee2e6;
-}
-
-.nav-tabs .nav-link.active {
-    color: var(--primary-color);
-    border-bottom-color: var(--primary-color);
-    background-color: transparent;
-}
-
-/* Buttons */
-.btn {
-    transition: all 0.2s ease;
-}
-
-.btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
-}
-
-.btn:active {
-    transform: translateY(0);
+/* Stats Badge */
+#stats-badge {
+    font-size: 0.9rem;
+    padding: 0.6rem 1.2rem;
 }
 
 /* Toast Notifications */
 .toast {
-    min-width: 300px;
+    min-width: 350px;
 }
 
 /* Loading Spinner */
@@ -204,156 +339,176 @@ body {
     border-width: 0.15em;
 }
 
-/* Validation Messages */
-.validation-error {
-    color: var(--danger-color);
-    padding: 0.5rem;
-    border-left: 3px solid var(--danger-color);
-    background-color: #f8d7da;
-    margin-bottom: 0.5rem;
-    border-radius: 4px;
-}
-
-.validation-warning {
-    color: var(--warning-color);
-    padding: 0.5rem;
-    border-left: 3px solid var(--warning-color);
-    background-color: #fff3cd;
-    margin-bottom: 0.5rem;
-    border-radius: 4px;
-}
-
-.validation-success {
-    color: var(--success-color);
-    padding: 0.5rem;
-    border-left: 3px solid var(--success-color);
-    background-color: #d1e7dd;
-    margin-bottom: 0.5rem;
-    border-radius: 4px;
-}
-
-/* Stats Badge */
-#stats-badge {
-    font-size: 0.875rem;
-    padding: 0.5rem 1rem;
-}
-
-/* Template Editor Sections */
-.col-md-6.border-end {
-    border-right: 1px solid #dee2e6 !important;
-}
-
-.col-md-6 .p-3 {
-    padding: 1rem !important;
-    background-color: #f8f9fa;
-    border-bottom: 1px solid #dee2e6;
-}
-
-/* Responsive - Larger Screens */
-@media (min-width: 1200px) {
-    .container-fluid {
-        padding-left: 40px;
-        padding-right: 40px;
-    }
-
-    .CodeMirror {
-        height: 750px !important;
-    }
-
-    #template-preview {
-        min-height: 750px !important;
-        max-height: 750px !important;
-    }
-}
-
-/* Responsive - Medium Screens */
-@media (max-width: 992px) {
-    .CodeMirror {
-        height: 500px !important;
-    }
-
-    #template-preview {
-        min-height: 500px !important;
-        max-height: 500px !important;
-    }
-}
-
-/* Responsive - Small Screens */
-@media (max-width: 768px) {
-    .col-md-6,
-    .col-md-4,
-    .col-md-8 {
-        margin-bottom: 1rem;
-        max-width: 100%;
-        flex: 0 0 100%;
-    }
-
-    .CodeMirror {
-        height: 400px !important;
-    }
-
-    #template-preview,
-    #email-preview {
-        min-height: 400px !important;
-        max-height: 400px !important;
-    }
-
-    .container-fluid {
-        padding-left: 10px;
-        padding-right: 10px;
-    }
-}
-
-/* Smooth Transitions - Remove Universal Selector */
-.btn, .card, .nav-link {
-    transition: background-color 0.2s ease, border-color 0.2s ease;
-}
-
-/* Focus States */
-.form-control:focus {
-    border-color: var(--primary-color);
-    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
-}
-
 /* Custom Scrollbar */
 ::-webkit-scrollbar {
-    width: 10px;
-    height: 10px;
+    width: 12px;
+    height: 12px;
 }
 
 ::-webkit-scrollbar-track {
     background: #f1f1f1;
-    border-radius: 10px;
+    border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb {
     background: #888;
-    border-radius: 10px;
+    border-radius: 6px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
 }
 
-/* Email Preview Content */
-#template-preview .email-container,
-#email-preview .email-body {
-    max-width: 600px;
-    margin: 0 auto;
+/* Responsive - Extra Large Screens (1400px+) */
+@media (min-width: 1400px) {
+    .container-fluid {
+        padding-left: 50px;
+        padding-right: 50px;
+    }
+
+    #template-panel .row.g-0 {
+        min-height: calc(100vh - 220px);
+    }
+
+    .CodeMirror,
+    .CodeMirror-scroll,
+    #template-preview {
+        min-height: 700px;
+    }
 }
 
-/* Ensure Full Width Usage */
-.tab-pane {
-    width: 100%;
+/* Responsive - Large Screens (1200px - 1399px) */
+@media (min-width: 1200px) and (max-width: 1399px) {
+    .container-fluid {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
 }
 
-/* Fix Row Gutters */
+/* Responsive - Medium Screens (992px - 1199px) */
+@media (max-width: 1199px) {
+    .container-fluid {
+        padding-left: 25px;
+        padding-right: 25px;
+    }
+
+    .CodeMirror,
+    .CodeMirror-scroll {
+        min-height: 550px;
+    }
+
+    #template-preview {
+        min-height: 550px;
+    }
+}
+
+/* Responsive - Tablets (768px - 991px) */
+@media (max-width: 991px) {
+    #template-panel .row.g-0 {
+        flex-wrap: wrap;
+        min-height: auto;
+    }
+
+    #template-panel .row.g-0 > .col-md-6 {
+        flex: 0 0 100%;
+        max-width: 100%;
+        min-height: 500px;
+    }
+
+    .col-md-6.border-end {
+        border-right: none !important;
+        border-bottom: 2px solid #dee2e6;
+    }
+
+    .CodeMirror,
+    .CodeMirror-scroll {
+        min-height: 500px;
+    }
+
+    #template-preview {
+        min-height: 500px;
+    }
+}
+
+/* Responsive - Mobile (max 767px) */
+@media (max-width: 767px) {
+    .container-fluid {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .navbar {
+        padding: 0.75rem 1rem;
+    }
+
+    .nav-tabs .nav-link {
+        padding: 0.75rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .card-body {
+        padding: 1rem;
+    }
+
+    .CodeMirror,
+    .CodeMirror-scroll {
+        min-height: 400px;
+        font-size: 12px;
+    }
+
+    #template-preview {
+        min-height: 400px;
+        padding: 1rem;
+    }
+
+    #email-preview {
+        min-height: 400px;
+        padding: 1rem;
+    }
+
+    .btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.9rem;
+    }
+
+    .btn-lg {
+        padding: 0.7rem 1.5rem;
+        font-size: 1rem;
+    }
+}
+
+/* Fix Focus States */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Improve Row Spacing */
 .row {
-    margin-left: -12px;
-    margin-right: -12px;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .row > * {
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Email List Scroll */
+#email-list {
+    max-height: calc(100vh - 300px);
+}
+
+/* Generate Tab Spacing */
+#generate-panel .alert {
+    margin-bottom: 2rem;
+}
+
+#generate-panel .text-center {
+    margin: 2rem 0;
+}
+
+/* Ensure No Overflow */
+body, html {
+    overflow-x: hidden;
 }

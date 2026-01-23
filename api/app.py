@@ -12,13 +12,22 @@ current_dir = Path(__file__).parent.parent
 if str(current_dir) not in sys.path:
     sys.path.insert(0, str(current_dir))
 
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, Response
 from fastapi.middleware.cors import CORSMiddleware
 import logging
 
 from api.routes import router
+
+# Custom StaticFiles with no-cache headers
+class NoCacheStaticFiles(StaticFiles):
+    async def get_response(self, path: str, scope):
+        response = await super().get_response(path, scope)
+        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+        return response
 
 # Configure logging
 logging.basicConfig(
@@ -49,14 +58,18 @@ app.include_router(router, prefix="/api")
 # Serve frontend static files
 frontend_dir = Path(__file__).parent.parent / "frontend"
 if frontend_dir.exists():
-    app.mount("/static", StaticFiles(directory=str(frontend_dir)), name="static")
+    app.mount("/static", NoCacheStaticFiles(directory=str(frontend_dir)), name="static")
 
 @app.get("/")
 async def root():
     """Serve the main frontend page"""
     frontend_file = frontend_dir / "index.html"
     if frontend_file.exists():
-        return FileResponse(frontend_file)
+        response = FileResponse(frontend_file)
+        response.headers["Cache-Control"] = "no-cache, no-store, must-revalidate"
+        response.headers["Pragma"] = "no-cache"
+        response.headers["Expires"] = "0"
+        return response
     return {"message": "CSV Email Tool API", "status": "running"}
 
 @app.get("/health")

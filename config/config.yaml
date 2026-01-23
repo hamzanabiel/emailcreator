@@ -1,88 +1,42 @@
-# CSV Email Tool Configuration
-
-# Company Information
 company:
-  name: "Zyrka"
-  sender_name: "Hamza"
-  sender_title: "Operations"
-
-# Email Settings
-email:
-  # Subject line templates
-  subject_single: "{entity_name} Invoice {invoice_number}"
-  subject_group: "{group_name} Invoices {invoice_numbers}"
-
-  # Default sender (can be overridden in CSV)
-  from: "billing@yourcompany.com"
-
-  # Email format preference
-  # Options: 'msg' (Windows Outlook), 'eml' (universal), 'auto' (detect platform)
-  format: "auto"
-
-# File Paths
-paths:
-  # Base directory for attachments (relative or absolute)
-  attachment_base: "/Users/hamza/Documents/GitHub/zzinvoices"
-
-  # Output directory for generated emails
-  output: "output"
-
-  # Template file
-  template: "config/template.html"
-
-  # Company logo/banner (optional)
-  banner: "config/banner.png"
-
-# Grouping Settings
-grouping:
-  # Column name for grouping entities
-  group_column: "Group"
-
-  # Column name for entity name
-  entity_column: "Entity Name"
-
-  # Column name for invoice number
-  invoice_column: "Invoice Number"
-
-# CSV Column Mappings (must match CSV headers)
+  name: Maples Group
+  sender_name: Hamza
+  sender_title: Analyst
 csv_columns:
-  to: "To"
-  cc: "CC"
-  bcc: "BCC"
-  subject: "Subject"
-  entity_name: "Entity Name"
-  invoice_number: "Invoice Number"
-  amount: "Amount"
-  due_date: "Due Date"
-  attachment: "Attachment Path"
-  group: "Group"
-  custom_message: "Custom Message"
-
-# Validation Settings
-validation:
-  # Require valid email addresses
-  validate_emails: true
-
-  # Check if attachment files exist
-  check_attachments: true
-
-  # Warn on missing optional fields
-  warn_missing_fields: true
-
-# Output Settings
-output:
-  # Add timestamp to output filenames
-  timestamp: true
-
-  # File naming pattern
-  # Available variables: {entity}, {group}, {timestamp}, {invoice}
-  filename_pattern: "{entity}_{invoice}_{timestamp}"
-
-  # Create subdirectories by date
-  organize_by_date: false
-
-# Logging
+  amount: Amount
+  attachment: Attachment Path
+  bcc: BCC
+  cc: CC
+  custom_message: Custom Message
+  due_date: Due Date
+  entity_name: Entity Name
+  group: Group
+  invoice_number: Invoice Number
+  subject: Subject
+  to: To
+email:
+  format: auto
+  from: hamzanabiel@gmail.com
+  subject_group: '{group_name} Invoices {invoice_numbers}'
+  subject_single: '{entity_name} Invoice {invoice_number}'
+grouping:
+  entity_column: Entity Name
+  group_column: Group
+  invoice_column: Invoice Number
 logging:
-  level: "INFO"  # DEBUG, INFO, WARNING, ERROR
-  file: "email_tool.log"
   console: true
+  file: email_tool.log
+  level: INFO
+output:
+  filename_pattern: '{entity}_{invoice}_{timestamp}'
+  organize_by_date: false
+  timestamp: true
+paths:
+  attachment_base: /Users/hamza/Documents/GitHub/zzinvoices
+  banner: config/banner.png
+  output: output
+  template: config/template.html
+validation:
+  check_attachments: true
+  validate_emails: true
+  warn_missing_fields: true

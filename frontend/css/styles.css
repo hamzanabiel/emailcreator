@@ -24,8 +24,8 @@ body {
 .container-fluid {
     max-width: 100%;
     width: 100%;
-    padding-left: 30px;
-    padding-right: 30px;
+    padding-left: 15px;
+    padding-right: 15px;
     margin: 0;
 }
 
@@ -122,6 +122,7 @@ body {
 .CodeMirror {
     height: 740px !important;
     max-height: 740px !important;
+    width: 100% !important;
     font-size: 14px;
     font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
     line-height: 1.5;
@@ -141,15 +142,22 @@ body {
     background-color: #ffffff;
     overflow-y: auto;
     overflow-x: hidden;
-    padding: 2rem;
+    padding: 1.5rem;
     height: 740px;
     max-height: 740px;
+    width: 100%;
 }
 
-/* Email Preview Content - Centered */
-#template-preview .email-container,
+/* Email Preview Content - Use Full Width */
+#template-preview .email-container {
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0 1rem;
+}
+
 #email-preview .email-body {
-    max-width: 650px;
+    max-width: 900px;
     margin: 0 auto;
 }
 
@@ -177,13 +185,13 @@ body {
 /* CSV Table - Full Width */
 #csv-grid {
     min-height: 500px;
-    width: 100%;
+    width: 100% !important;
     margin-top: 1rem;
 }
 
 .tabulator {
     font-size: 14px;
-    width: 100%;
+    width: 100% !important;
 }
 
 .tabulator-cell {
@@ -202,6 +210,7 @@ body {
     max-height: calc(100vh - 300px);
     overflow-y: auto;
     padding: 1.5rem;
+    width: 100%;
 }
 
 /* Email List Items */
@@ -369,8 +378,8 @@ body {
 /* Responsive - Extra Large Screens (1400px+) */
 @media (min-width: 1400px) {
     .container-fluid {
-        padding-left: 50px;
-        padding-right: 50px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 
     #template-panel .row.g-0,
@@ -390,16 +399,16 @@ body {
 /* Responsive - Large Screens (1200px - 1399px) */
 @media (min-width: 1200px) and (max-width: 1399px) {
     .container-fluid {
-        padding-left: 40px;
-        padding-right: 40px;
+        padding-left: 20px;
+        padding-right: 20px;
     }
 }
 
 /* Responsive - Medium Screens (992px - 1199px) */
 @media (max-width: 1199px) {
     .container-fluid {
-        padding-left: 25px;
-        padding-right: 25px;
+        padding-left: 15px;
+        padding-right: 15px;
     }
 
     #template-panel .row.g-0,
@@ -511,8 +520,14 @@ body {
 }
 
 .row > * {
-    padding-left: 15px;
-    padding-right: 15px;
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
+/* Remove padding from template panel columns for full width */
+#template-panel .row.g-0 > * {
+    padding-left: 0 !important;
+    padding-right: 0 !important;
 }
 
 /* Email List Scroll */

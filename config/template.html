@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invoice Notification</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333333;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .email-container {
+            background-color: #ffffff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .banner {
+            background-color: #0066cc;
+            padding: 30px 20px;
+            text-align: center;
+        }
+        .banner img {
+            max-width: 200px;
+            height: auto;
+        }
+        .banner h1 {
+            color: #ffffff;
+            margin: 10px 0 0 0;
+            font-size: 24px;
+        }
+        .content {
+            padding: 30px;
+        }
+        .greeting {
+            font-size: 16px;
+            margin-bottom: 20px;
+        }
+        .invoice-section {
+            background-color: #f9f9f9;
+            border-left: 4px solid #0066cc;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .invoice-section h2 {
+            color: #0066cc;
+            margin-top: 0;
+            font-size: 18px;
+        }
+        .invoice-details {
+            margin: 10px 0;
+        }
+        .invoice-details table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .invoice-details td {
+            padding: 8px 0;
+            border-bottom: 1px solid #eeeeee;
+        }
+        .invoice-details td:first-child {
+            font-weight: 600;
+            width: 40%;
+            color: #666666;
+        }
+        .invoice-details td:last-child {
+            text-align: right;
+        }
+        .amount-due {
+            font-size: 20px;
+            font-weight: bold;
+            color: #d9534f;
+        }
+        .custom-message {
+            background-color: #fff9e6;
+            border-left: 4px solid #ffc107;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .attachments {
+            margin: 20px 0;
+            padding: 15px;
+            background-color: #e8f4f8;
+            border-radius: 4px;
+        }
+        .attachments h3 {
+            margin-top: 0;
+            color: #0066cc;
+            font-size: 16px;
+        }
+        .attachments ul {
+            margin: 10px 0;
+            padding-left: 20px;
+        }
+        .attachments li {
+            margin: 5px 0;
+        }
+        .footer {
+            padding: 20px 30px;
+            background-color: #f9f9f9;
+            text-align: center;
+            font-size: 12px;
+            color: #666666;
+            border-top: 1px solid #eeeeee;
+        }
+        .footer p {
+            margin: 5px 0;
+        }
+        .cta-button {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: #0066cc;
+            color: #ffffff !important;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 15px 0;
+            font-weight: 600;
+        }
+        .cta-button:hover {
+            background-color: #0052a3;
+        }
+    </style>
+</head>
+<body>
+    <div class="email-container">
+        <!-- Banner Section -->
+        <div class="banner">
+            {% if banner_path %}
+            <img src="{{ banner_path }}" alt="{{ company_name }}">
+            {% else %}
+            <h1>{{ company_name }}</h1>
+            {% endif %}
+        </div>
+
+        <!-- Main Content -->
+        <div class="content">
+            <div class="greeting">
+                <p>Dear {{ recipient_name or 'Valued Customer' }},</p>
+            </div>
+
+            {% if custom_message %}
+            <div class="custom-message">
+                <p>{{ custom_message }}</p>
+            </div>
+            {% endif %}
+
+            {% if is_group %}
+            <!-- Group Email: Multiple Invoices -->
+            <p>This email contains invoice information for <strong>{{ group_name }}</strong>. Please find the details below:</p>
+
+            {% for invoice in invoices %}
+            <div class="invoice-section">
+                <h2>{{ invoice.entity_name }} - Invoice #{{ invoice.invoice_number }}</h2>
+                <div class="invoice-details">
+                    <table>
+                        <tr>
+                            <td>Invoice Number:</td>
+                            <td>#{{ invoice.invoice_number }}</td>
+                        </tr>
+                        <tr>
+                            <td>Amount Due:</td>
+                            <td class="amount-due">${{ invoice.amount }}</td>
+                        </tr>
+                        <tr>
+                            <td>Due Date:</td>
+                            <td>{{ invoice.due_date }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            {% endfor %}
+
+            {% else %}
+            <!-- Single Invoice -->
+            <p>We are writing to inform you about the following invoice for <strong>{{ entity_name }}</strong>:</p>
+
+            <div class="invoice-section">
+                <h2>Invoice Details</h2>
+                <div class="invoice-details">
+                    <table>
+                        <tr>
+                            <td>Invoice Number:</td>
+                            <td>#{{ invoice_number }}</td>
+                        </tr>
+                        <tr>
+                            <td>Entity Name:</td>
+                            <td>{{ entity_name }}</td>
+                        </tr>
+                        <tr>
+                            <td>Amount Due:</td>
+                            <td class="amount-due">${{ amount }}</td>
+                        </tr>
+                        <tr>
+                            <td>Due Date:</td>
+                            <td>{{ due_date }}</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+            {% endif %}
+
+            {% if attachments and attachments|length > 0 %}
+            <div class="attachments">
+                <h3>📎 Attached Documents</h3>
+                <p>The following documents are attached to this email:</p>
+                <ul>
+                {% for attachment in attachments %}
+                    <li>{{ attachment }}</li>
+                {% endfor %}
+                </ul>
+            </div>
+            {% endif %}
+
+            <p>Please review the attached invoice(s) and process payment by the due date. If you have any questions or concerns, please don't hesitate to contact us.</p>
+
+            <p>Thank you for your prompt attention to this matter.</p>
+
+            <p>Best regards,<br>
+            <strong>{{ sender_name }}</strong><br>
+            {{ sender_title }}<br>
+            {{ company_name }}</p>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p><strong>{{ company_name }}</strong></p>
+            <p>This is an automated message. Please do not reply directly to this email.</p>
+            <p>© {{ current_year }} {{ company_name }}. All rights reserved.</p>
+        </div>
+    </div>
+</body>
+</html>

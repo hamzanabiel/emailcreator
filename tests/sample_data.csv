@@ -1,0 +1,9 @@
+To,CC,BCC,Subject,Entity Name,Invoice Number,Amount,Due Date,Attachment Path,Group,Custom Message
+john.doe@example.com,manager@example.com,,ACME Corp Invoice 0001,ACME Corporation,0001,2500.00,2026-02-15,invoice_0001.pdf,,Thank you for your continued business with us.
+jane.smith@example.com,,,Tech Solutions Invoice 0002,Tech Solutions LLC,0002,1750.50,2026-02-20,invoice_0002.pdf,,
+accounting@bigcorp.com,cfo@bigcorp.com,audit@bigcorp.com,,BigCorp Industries,0003,5000.00,2026-02-10,invoice_0003.pdf,BigCorp Group,
+finance@bigcorp.com,,,BigCorp Manufacturing,0004,3200.00,2026-02-10,invoice_0004.pdf,BigCorp Group,
+ar@midsize.com,,,MidSize Company,0005,890.00,2026-02-25,invoice_0005.pdf,,Your invoice is ready for review.
+contact@startup.io,,,StartUp Inc,0006,450.00,2026-03-01,invoice_0006.pdf,,
+billing@enterprise.com,procurement@enterprise.com,,Enterprise Corp Invoice 0007,Enterprise Corp,0007,12500.00,2026-02-08,invoice_0007.pdf,,Priority payment requested.
+payments@smallbiz.com,,,Small Business Co,0008,675.50,2026-02-28,invoice_0008.pdf,,

@@ -3,11 +3,19 @@ FastAPI Application - Main Entry Point
 Serves the web UI and provides REST API endpoints
 """
 
+import sys
+import os
+from pathlib import Path
+
+# Add parent directory to Python path for imports
+current_dir = Path(__file__).parent.parent
+if str(current_dir) not in sys.path:
+    sys.path.insert(0, str(current_dir))
+
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 from fastapi.middleware.cors import CORSMiddleware
-from pathlib import Path
 import logging
 
 from api.routes import router

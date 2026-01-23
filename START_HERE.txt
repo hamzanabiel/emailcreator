@@ -6,7 +6,7 @@
 🚀 QUICK START (3 Commands):
 
    1. pip install -r requirements.txt
-   2. python api/app.py
+   2. python run.py
    3. Open: http://localhost:8000
 
 📖 DOCUMENTATION:

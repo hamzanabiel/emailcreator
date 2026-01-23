@@ -11,3 +11,9 @@ pywin32>=305; platform_system == "Windows"
 # Utilities
 colorama>=0.4.6
 tqdm>=4.65.0
+
+# Web Frontend (FastAPI)
+fastapi>=0.104.0
+uvicorn>=0.24.0
+python-multipart>=0.0.6
+aiofiles>=23.0.0

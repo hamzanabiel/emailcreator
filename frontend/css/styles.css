@@ -1,0 +1,242 @@
+/* CSV Email Tool - Custom Styles */
+
+:root {
+    --primary-color: #0d6efd;
+    --success-color: #198754;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #0dcaf0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Upload Area */
+.upload-area {
+    border: 3px dashed #dee2e6;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+.upload-area:hover {
+    border-color: var(--primary-color);
+    background-color: #e7f1ff;
+}
+
+.upload-area.dragover {
+    border-color: var(--success-color);
+    background-color: #d1e7dd;
+}
+
+/* CSV Table */
+#csv-grid {
+    min-height: 400px;
+}
+
+.tabulator {
+    font-size: 14px;
+}
+
+.tabulator-cell {
+    padding: 8px;
+}
+
+/* CodeMirror Editor */
+.CodeMirror {
+    height: 600px;
+    font-size: 14px;
+    border: 1px solid #dee2e6;
+    border-radius: 4px;
+}
+
+/* Email Preview */
+#template-preview {
+    background-color: #fff;
+}
+
+#email-preview {
+    background-color: #fff;
+}
+
+/* Email List Items */
+.email-list-item {
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.email-list-item:hover {
+    background-color: #e7f1ff;
+}
+
+.email-list-item.active {
+    background-color: #0d6efd;
+    color: white;
+}
+
+.email-list-item.active * {
+    color: white !important;
+}
+
+/* Progress Bar */
+#generate-progress {
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Cards */
+.card {
+    border: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 1rem;
+}
+
+.card-header {
+    background-color: #fff;
+    border-bottom: 2px solid #f8f9fa;
+    font-weight: 600;
+}
+
+/* Tabs */
+.nav-tabs {
+    border-bottom: 2px solid #dee2e6;
+}
+
+.nav-tabs .nav-link {
+    color: #6c757d;
+    border: none;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+}
+
+.nav-tabs .nav-link:hover {
+    border-bottom-color: #dee2e6;
+}
+
+.nav-tabs .nav-link.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+    background-color: transparent;
+}
+
+/* Buttons */
+.btn {
+    transition: all 0.2s ease;
+}
+
+.btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+/* Toast Notifications */
+.toast {
+    min-width: 300px;
+}
+
+/* Loading Spinner */
+.spinner-border-sm {
+    width: 1rem;
+    height: 1rem;
+    border-width: 0.15em;
+}
+
+/* Validation Messages */
+.validation-error {
+    color: var(--danger-color);
+    padding: 0.5rem;
+    border-left: 3px solid var(--danger-color);
+    background-color: #f8d7da;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+}
+
+.validation-warning {
+    color: var(--warning-color);
+    padding: 0.5rem;
+    border-left: 3px solid var(--warning-color);
+    background-color: #fff3cd;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+}
+
+.validation-success {
+    color: var(--success-color);
+    padding: 0.5rem;
+    border-left: 3px solid var(--success-color);
+    background-color: #d1e7dd;
+    margin-bottom: 0.5rem;
+    border-radius: 4px;
+}
+
+/* Stats Badge */
+#stats-badge {
+    font-size: 0.875rem;
+    padding: 0.5rem 1rem;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .col-md-6,
+    .col-md-4,
+    .col-md-8 {
+        margin-bottom: 1rem;
+    }
+
+    .CodeMirror {
+        height: 400px;
+    }
+
+    #template-preview,
+    #email-preview {
+        max-height: 400px;
+    }
+}
+
+/* Smooth Transitions */
+* {
+    transition: background-color 0.2s ease, border-color 0.2s ease;
+}
+
+/* Focus States */
+.form-control:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}

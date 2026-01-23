@@ -1,0 +1,29 @@
+╔═══════════════════════════════════════════════════════════════╗
+║               CSV EMAIL TOOL - WEB INTERFACE                  ║
+║                      START HERE                               ║
+╚═══════════════════════════════════════════════════════════════╝
+
+🚀 QUICK START (3 Commands):
+
+   1. pip install -r requirements.txt
+   2. python api/app.py
+   3. Open: http://localhost:8000
+
+📖 DOCUMENTATION:
+
+   FRONTEND_GUIDE.md    - Complete usage guide
+   FRONTEND_COMPLETE.md - What was built
+   INSTALL.md          - CLI installation guide
+
+🎯 YOUR CLI STILL WORKS:
+
+   python -m src.main data.csv
+
+   Nothing in src/ was changed!
+
+💡 NEED HELP?
+
+   Read FRONTEND_GUIDE.md for detailed instructions.
+
+✅ DONE!
+

@@ -2,9 +2,9 @@
 
 # Company Information
 company:
-  name: "Your Company Name"
-  sender_name: "Accounts Receivable"
-  sender_title: "Billing Department"
+  name: "Zyrka"
+  sender_name: "Hamza"
+  sender_title: "Operations"
 
 # Email Settings
 email:
@@ -22,7 +22,7 @@ email:
 # File Paths
 paths:
   # Base directory for attachments (relative or absolute)
-  attachment_base: "tests/attachments"
+  attachment_base: "/Users/hamza/Documents/GitHub/zzinvoices"
 
   # Output directory for generated emails
   output: "output"

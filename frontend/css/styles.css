@@ -1,11 +1,25 @@
-/* CSV Email Tool - Custom Styles - FULLY RESPONSIVE */
+/* CSV Email Tool - Custom Styles - PREMIUM MODERN UI */
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap');
 
 :root {
-    --primary-color: #0d6efd;
-    --success-color: #198754;
-    --danger-color: #dc3545;
-    --warning-color: #ffc107;
-    --info-color: #0dcaf0;
+    --primary-color: #6366f1;
+    /* Indigo */
+    --primary-hover: #4f46e5;
+    --secondary-color: #64748b;
+    /* Slate */
+    --success-color: #10b981;
+    /* Emerald */
+    --danger-color: #ef4444;
+    /* Red */
+    --warning-color: #f59e0b;
+    /* Amber */
+    --info-color: #06b6d4;
+    /* Cyan */
+    --bg-color: #f8fafc;
+    --card-bg: rgba(255, 255, 255, 0.8);
+    --border-color: rgba(226, 232, 240, 0.8);
+    --glass-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.07);
+    --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 * {
@@ -13,11 +27,15 @@
 }
 
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f8f9fa;
+    font-family: 'Outfit', sans-serif;
+    background-color: var(--bg-color);
+    background-image:
+        radial-gradient(at 0% 0%, rgba(99, 102, 241, 0.05) 0px, transparent 50%),
+        radial-gradient(at 100% 0%, rgba(6, 182, 212, 0.05) 0px, transparent 50%);
     overflow-x: hidden;
     margin: 0;
     padding: 0;
+    min-height: 100vh;
 }
 
 /* Main Container - Truly Full Width */
@@ -29,34 +47,54 @@ body {
     margin: 0;
 }
 
-/* Navbar - Full Width */
+/* Navbar - Glassmorphism */
 .navbar {
     padding: 1rem 2rem;
+    background: rgba(99, 102, 241, 0.9) !important;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: var(--glass-shadow);
+}
+
+.navbar-brand {
+    font-weight: 700;
+    letter-spacing: -0.5px;
 }
 
 /* Tab Content - Full Width */
 .tab-content {
     width: 100%;
-    margin-top: 1.5rem;
+    margin-top: 2rem;
 }
 
 .tab-pane {
     width: 100%;
 }
 
-/* Cards - Full Width */
+/* Cards - Premium Style */
 .card {
-    border: none;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    margin-bottom: 1.5rem;
+    background: var(--card-bg);
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    box-shadow: var(--glass-shadow);
+    margin-bottom: 2rem;
     width: 100%;
+    transition: var(--transition);
+}
+
+.card:hover {
+    box-shadow: 0 12px 40px 0 rgba(31, 38, 135, 0.1);
 }
 
 .card-header {
-    background-color: #fff;
-    border-bottom: 2px solid #f8f9fa;
+    background: transparent;
+    border-bottom: 1px solid var(--border-color);
     font-weight: 600;
-    padding: 1.25rem 1.5rem;
+    padding: 1.5rem 2rem;
+    font-size: 1.1rem;
 }
 
 .card-body {
@@ -72,25 +110,24 @@ body {
     padding: 0 !important;
 }
 
-/* Template Editor Row - Fixed Height Layout */
+/* Template Editor Row - Flexible Layout */
 #template-panel .row.g-0 {
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     margin: 0;
     width: 100%;
-    height: 800px;
-    max-height: 800px;
-    overflow: hidden;
+    min-height: 800px;
+    height: auto;
+    overflow: visible;
 }
 
-#template-panel .row.g-0 > .col-md-6 {
+#template-panel .row.g-0>.col-md-6 {
     width: 50%;
     min-width: 0;
     padding: 0;
     display: flex;
     flex-direction: column;
-    height: 800px;
-    max-height: 800px;
+    min-height: 800px;
 }
 
 /* Editor Section */
@@ -118,34 +155,34 @@ body {
     border-bottom: 1px solid #dee2e6;
 }
 
-/* CodeMirror Editor - Fixed Height with Internal Scrolling */
+/* CodeMirror Editor - Modern Dark Theme Integration */
 .CodeMirror {
-    height: 740px !important;
-    max-height: 740px !important;
+    flex-grow: 1;
+    min-height: 700px;
+    height: auto !important;
     width: 100% !important;
     font-size: 14px;
-    font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', 'Consolas', monospace;
-    line-height: 1.5;
+    font-family: 'JetBrains Mono', 'Fira Code', monospace;
+    line-height: 1.6;
     border: none;
     border-radius: 0;
-    overflow-y: auto !important;
+    background: #1e1e1e !important;
 }
 
 .CodeMirror-scroll {
-    height: 740px !important;
-    max-height: 740px !important;
-    overflow-y: auto !important;
+    min-height: 700px;
+    height: auto !important;
 }
 
-/* Template Preview - Fixed Height with Internal Scrolling */
+/* Template Preview - Modern White Canvas */
 #template-preview {
-    background-color: #ffffff;
+    background-color: #f1f5f9;
+    flex-grow: 1;
     overflow-y: auto;
-    overflow-x: hidden;
-    padding: 1.5rem;
-    height: 740px;
-    max-height: 740px;
+    padding: 2.5rem;
+    min-height: 700px;
     width: 100%;
+    border-left: 1px solid var(--border-color);
 }
 
 /* Email Preview Content - Use Full Width */
@@ -227,8 +264,9 @@ body {
 }
 
 .email-list-item.active {
-    background-color: #0d6efd;
+    background: var(--primary-color);
     color: white;
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
 }
 
 .email-list-item.active * {
@@ -237,51 +275,74 @@ body {
 
 /* Configuration Form */
 .form-label {
-    font-weight: 600;
+    font-weight: 500;
     margin-bottom: 0.5rem;
-    color: #495057;
+    color: var(--secondary-color);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
 }
 
 .form-control {
-    padding: 0.75rem;
-    font-size: 14px;
+    padding: 0.85rem 1rem;
+    font-size: 0.95rem;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.5);
+    transition: var(--transition);
 }
 
-/* Tabs - Better Spacing */
+.form-control:focus {
+    background: #fff;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.1);
+}
+
+/* Tabs - Modern Minimalist */
 .nav-tabs {
-    border-bottom: 2px solid #dee2e6;
-    margin-bottom: 0;
+    border-bottom: 1px solid var(--border-color);
+    gap: 1rem;
 }
 
 .nav-tabs .nav-link {
-    color: #6c757d;
+    color: var(--secondary-color);
     border: none;
-    border-bottom: 3px solid transparent;
-    transition: all 0.3s ease;
+    border-bottom: 2px solid transparent;
+    transition: var(--transition);
     padding: 1rem 1.5rem;
-    font-weight: 500;
+    font-weight: 600;
+    border-radius: 0;
 }
 
 .nav-tabs .nav-link:hover {
-    border-bottom-color: #dee2e6;
+    color: var(--primary-color);
+    background-color: rgba(99, 102, 241, 0.05);
 }
 
 .nav-tabs .nav-link.active {
     color: var(--primary-color);
-    border-bottom-color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
     background-color: transparent;
 }
 
-/* Buttons - Better Styling */
+/* Buttons - Premium */
 .btn {
-    transition: all 0.2s ease;
-    padding: 0.6rem 1.2rem;
-    font-weight: 500;
+    transition: var(--transition);
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 12px;
 }
 
-.btn:hover {
-    transform: translateY(-1px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+.btn-primary {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-hover);
+    border-color: var(--primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 16px rgba(99, 102, 241, 0.2);
 }
 
 .btn:active {
@@ -303,6 +364,7 @@ body {
         opacity: 0;
         transform: translateY(-10px);
     }
+
     to {
         opacity: 1;
         transform: translateY(0);
@@ -383,7 +445,7 @@ body {
     }
 
     #template-panel .row.g-0,
-    #template-panel .row.g-0 > .col-md-6 {
+    #template-panel .row.g-0>.col-md-6 {
         height: 900px;
         max-height: 900px;
     }
@@ -412,7 +474,7 @@ body {
     }
 
     #template-panel .row.g-0,
-    #template-panel .row.g-0 > .col-md-6 {
+    #template-panel .row.g-0>.col-md-6 {
         height: 700px;
         max-height: 700px;
     }
@@ -433,7 +495,7 @@ body {
         max-height: none;
     }
 
-    #template-panel .row.g-0 > .col-md-6 {
+    #template-panel .row.g-0>.col-md-6 {
         width: 100%;
         max-width: 100%;
         height: 600px;
@@ -473,7 +535,7 @@ body {
         padding: 1rem;
     }
 
-    #template-panel .row.g-0 > .col-md-6 {
+    #template-panel .row.g-0>.col-md-6 {
         height: 500px;
         max-height: 500px;
     }
@@ -519,13 +581,13 @@ body {
     margin-right: 0;
 }
 
-.row > * {
+.row>* {
     padding-left: 12px;
     padding-right: 12px;
 }
 
 /* Remove padding from template panel columns for full width */
-#template-panel .row.g-0 > * {
+#template-panel .row.g-0>* {
     padding-left: 0 !important;
     padding-right: 0 !important;
 }
@@ -545,6 +607,7 @@ body {
 }
 
 /* Ensure No Overflow */
-body, html {
+body,
+html {
     overflow-x: hidden;
 }

@@ -44,7 +44,7 @@ const app = {
     onTabChange(tabId) {
         console.log('Tab changed to:', tabId);
 
-        switch(tabId) {
+        switch (tabId) {
             case '#emails-panel':
                 emailViewer.refresh();
                 break;
@@ -82,28 +82,34 @@ const app = {
 
         // Set icon based on type
         let icon = 'info-circle';
-        let headerClass = 'bg-info text-white';
+        let headerClass = 'bg-white text-indigo';
 
-        switch(type) {
+        switch (type) {
             case 'success':
                 icon = 'check-circle-fill';
-                headerClass = 'bg-success text-white';
+                headerClass = 'border-bottom border-success text-success';
                 break;
             case 'error':
                 icon = 'exclamation-triangle-fill';
-                headerClass = 'bg-danger text-white';
+                headerClass = 'border-bottom border-danger text-danger';
                 break;
             case 'warning':
                 icon = 'exclamation-circle-fill';
-                headerClass = 'bg-warning';
+                headerClass = 'border-bottom border-warning text-warning';
+                break;
+            case 'info':
+                icon = 'info-circle-fill';
+                headerClass = 'border-bottom border-primary text-primary';
                 break;
         }
 
-        toastHeader.className = `toast-header ${headerClass}`;
-        toastHeader.querySelector('i').className = `bi bi-${icon} me-2`;
+        toastEl.className = 'toast show border-0 shadow-lg rounded-4 overflow-hidden';
+        toastHeader.className = `toast-header bg-white border-0 py-3 px-4 ${headerClass}`;
+        toastHeader.querySelector('i').className = `bi bi-${icon} me-2 fs-5`;
+        toastBody.className = 'toast-body bg-white py-3 px-4 fs-6 fw-medium';
         toastBody.textContent = message;
 
-        const toast = new bootstrap.Toast(toastEl);
+        const toast = new bootstrap.Toast(toastEl, { delay: 4000 });
         toast.show();
     },
 

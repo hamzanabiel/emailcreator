@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,52 +22,61 @@
     <!-- Custom CSS -->
     <link href="/static/css/styles.css?v=5.0" rel="stylesheet">
 </head>
+
 <body>
     <!-- Header -->
-    <nav class="navbar navbar-dark bg-primary">
-        <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">
-                <i class="bi bi-envelope-fill"></i>
-                CSV Email Tool
+    <nav class="navbar navbar-expand-lg navbar-dark shadow-lg sticky-top">
+        <div class="container-fluid px-4">
+            <span class="navbar-brand mb-0 h1 d-flex align-items-center">
+                <i class="bi bi-envelope-paper-heart-fill me-2 fs-3"></i>
+                <span class="fw-bold fs-4">CSV Email Tool</span>
             </span>
-            <div class="d-flex align-items-center">
-                <span class="badge bg-light text-dark me-2" id="stats-badge">
-                    <i class="bi bi-info-circle"></i> Ready
-                </span>
-                <button class="btn btn-sm btn-outline-light" onclick="window.open('/api/docs', '_blank')">
-                    <i class="bi bi-book"></i> API Docs
+            <div class="d-flex align-items-center gap-3">
+                <div class="stats-container d-flex align-items-center">
+                    <span class="badge rounded-pill bg-light text-primary px-3 py-2 shadow-sm" id="stats-badge">
+                        <i class="bi bi-activity me-1"></i> System Ready
+                    </span>
+                </div>
+                <button class="btn btn-sm btn-light rounded-pill px-3 shadow-sm border-0"
+                    onclick="window.open('/api/docs', '_blank')">
+                    <i class="bi bi-braces me-1"></i> API
                 </button>
             </div>
         </div>
     </nav>
 
     <!-- Main Container -->
-    <div class="container-fluid mt-3">
+    <div class="container-fluid mt-4 px-4">
         <!-- Tabs Navigation -->
-        <ul class="nav nav-tabs" id="mainTabs" role="tablist">
+        <ul class="nav nav-tabs nav-fill mb-4 p-1 rounded-4 bg-white/10" id="mainTabs" role="tablist">
             <li class="nav-item" role="presentation">
-                <button class="nav-link active" id="csv-tab" data-bs-toggle="tab" data-bs-target="#csv-panel" type="button">
-                    <i class="bi bi-file-earmark-spreadsheet"></i> CSV Data
+                <button class="nav-link active" id="csv-tab" data-bs-toggle="tab" data-bs-target="#csv-panel"
+                    type="button">
+                    <i class="bi bi-grid-3x3-gap-fill me-2"></i> CSV Data
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="config-tab" data-bs-toggle="tab" data-bs-target="#config-panel" type="button">
-                    <i class="bi bi-gear"></i> Configuration
+                <button class="nav-link" id="config-tab" data-bs-toggle="tab" data-bs-target="#config-panel"
+                    type="button">
+                    <i class="bi bi-sliders me-2"></i> Configuration
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="template-tab" data-bs-toggle="tab" data-bs-target="#template-panel" type="button">
-                    <i class="bi bi-file-code"></i> Email Template
+                <button class="nav-link" id="template-tab" data-bs-toggle="tab" data-bs-target="#template-panel"
+                    type="button">
+                    <i class="bi bi-code-slash me-2"></i> Email Template
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="generate-tab" data-bs-toggle="tab" data-bs-target="#generate-panel" type="button">
-                    <i class="bi bi-play-circle"></i> Generate
+                <button class="nav-link" id="generate-tab" data-bs-toggle="tab" data-bs-target="#generate-panel"
+                    type="button">
+                    <i class="bi bi-rocket-takeoff-fill me-2"></i> Generate
                 </button>
             </li>
             <li class="nav-item" role="presentation">
-                <button class="nav-link" id="emails-tab" data-bs-toggle="tab" data-bs-target="#emails-panel" type="button">
-                    <i class="bi bi-envelope-open"></i> View Emails
+                <button class="nav-link" id="emails-tab" data-bs-toggle="tab" data-bs-target="#emails-panel"
+                    type="button">
+                    <i class="bi bi-mailbox2 me-2"></i> View Emails
                 </button>
             </li>
         </ul>
@@ -157,12 +167,12 @@
                                 <div class="col-md-6">
                                     <label class="form-label">Subject Template (Single)</label>
                                     <input type="text" class="form-control" id="config-subject-single"
-                                           placeholder="{entity_name} Invoice {invoice_number}">
+                                        placeholder="{entity_name} Invoice {invoice_number}">
                                 </div>
                                 <div class="col-md-6">
                                     <label class="form-label">Subject Template (Group)</label>
                                     <input type="text" class="form-control" id="config-subject-group"
-                                           placeholder="{group_name} Invoices {invoice_numbers}">
+                                        placeholder="{group_name} Invoices {invoice_numbers}">
                                 </div>
                             </div>
 
@@ -205,7 +215,8 @@
                             <div class="col-md-6 border-end">
                                 <div class="p-3">
                                     <h6>HTML Template</h6>
-                                    <small class="text-muted">Edit the email template. Use variables like {{entity_name}}, {{invoice_number}}, etc.</small>
+                                    <small class="text-muted">Edit the email template. Use variables like
+                                        {{entity_name}}, {{invoice_number}}, etc.</small>
                                 </div>
                                 <textarea id="template-editor"></textarea>
                             </div>
@@ -216,7 +227,8 @@
                                     <h6>Live Preview</h6>
                                     <small class="text-muted">Sample data preview</small>
                                 </div>
-                                <div id="template-preview" class="p-3 border-top" style="min-height: 600px; max-height: 800px; overflow-y: auto;">
+                                <div id="template-preview" class="p-3 border-top"
+                                    style="min-height: 600px; max-height: 800px; overflow-y: auto;">
                                     <div class="text-center text-muted">
                                         <i class="bi bi-hourglass-split"></i>
                                         <p>Loading preview...</p>
@@ -243,7 +255,8 @@
 
                         <!-- Generate Button -->
                         <div class="text-center my-4">
-                            <button id="generate-btn" class="btn btn-primary btn-lg" onclick="emailGenerator.generate()" disabled>
+                            <button id="generate-btn" class="btn btn-primary btn-lg" onclick="emailGenerator.generate()"
+                                disabled>
                                 <i class="bi bi-play-circle-fill"></i> Generate Emails
                             </button>
                         </div>
@@ -252,7 +265,7 @@
                         <div id="generate-progress" style="display: none;">
                             <div class="progress mb-3">
                                 <div id="progress-bar" class="progress-bar progress-bar-striped progress-bar-animated"
-                                     style="width: 0%">0%</div>
+                                    style="width: 0%">0%</div>
                             </div>
                             <p class="text-center text-muted" id="progress-text">Generating emails...</p>
                         </div>
@@ -306,7 +319,8 @@
                             <!-- Email Preview -->
                             <div class="col-md-8">
                                 <h6>Email Preview</h6>
-                                <div id="email-preview" class="border rounded p-3" style="min-height: 600px; max-height: 600px; overflow-y: auto;">
+                                <div id="email-preview" class="border rounded p-3"
+                                    style="min-height: 600px; max-height: 600px; overflow-y: auto;">
                                     <div class="text-center text-muted p-5">
                                         <i class="bi bi-envelope"></i>
                                         <p>Select an email to preview</p>
@@ -361,4 +375,5 @@
         });
     </script>
 </body>
+
 </html>

@@ -11,6 +11,34 @@
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     background-color: #f8f9fa;
+    overflow-x: hidden;
+}
+
+/* Main Container - Full Width */
+.container-fluid {
+    max-width: 100%;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+/* Tab Content - Full Width */
+.tab-content {
+    width: 100%;
+}
+
+/* Card Body - Better Spacing */
+.card-body {
+    padding: 1.5rem;
+}
+
+/* Template Editor Row - Full Width */
+.row.g-0 {
+    margin: 0;
+    width: 100%;
+}
+
+.row.g-0 > [class*='col-'] {
+    padding: 0;
 }
 
 /* Upload Area */
@@ -35,31 +63,43 @@ body {
 /* CSV Table */
 #csv-grid {
     min-height: 400px;
+    width: 100%;
 }
 
 .tabulator {
     font-size: 14px;
+    width: 100%;
 }
 
 .tabulator-cell {
     padding: 8px;
 }
 
-/* CodeMirror Editor */
+/* CodeMirror Editor - Better Sizing */
 .CodeMirror {
-    height: 600px;
-    font-size: 14px;
+    height: 700px !important;
+    font-size: 13px;
     border: 1px solid #dee2e6;
-    border-radius: 4px;
+    border-radius: 0;
+    width: 100%;
+}
+
+/* Template Preview - Better Sizing */
+#template-preview {
+    background-color: #fff;
+    min-height: 700px !important;
+    max-height: 700px !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding: 20px;
 }
 
 /* Email Preview */
-#template-preview {
-    background-color: #fff;
-}
-
 #email-preview {
     background-color: #fff;
+    min-height: 600px;
+    max-height: 600px;
+    overflow-y: auto;
 }
 
 /* Email List Items */
@@ -102,12 +142,18 @@ body {
     border: none;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     margin-bottom: 1rem;
+    width: 100%;
 }
 
 .card-header {
     background-color: #fff;
     border-bottom: 2px solid #f8f9fa;
     font-weight: 600;
+}
+
+/* Card Body - No Padding for Template Tab */
+#template-panel .card-body {
+    padding: 0 !important;
 }
 
 /* Tabs */
@@ -192,26 +238,74 @@ body {
     padding: 0.5rem 1rem;
 }
 
-/* Responsive */
+/* Template Editor Sections */
+.col-md-6.border-end {
+    border-right: 1px solid #dee2e6 !important;
+}
+
+.col-md-6 .p-3 {
+    padding: 1rem !important;
+    background-color: #f8f9fa;
+    border-bottom: 1px solid #dee2e6;
+}
+
+/* Responsive - Larger Screens */
+@media (min-width: 1200px) {
+    .container-fluid {
+        padding-left: 40px;
+        padding-right: 40px;
+    }
+
+    .CodeMirror {
+        height: 750px !important;
+    }
+
+    #template-preview {
+        min-height: 750px !important;
+        max-height: 750px !important;
+    }
+}
+
+/* Responsive - Medium Screens */
+@media (max-width: 992px) {
+    .CodeMirror {
+        height: 500px !important;
+    }
+
+    #template-preview {
+        min-height: 500px !important;
+        max-height: 500px !important;
+    }
+}
+
+/* Responsive - Small Screens */
 @media (max-width: 768px) {
     .col-md-6,
     .col-md-4,
     .col-md-8 {
         margin-bottom: 1rem;
+        max-width: 100%;
+        flex: 0 0 100%;
     }
 
     .CodeMirror {
-        height: 400px;
+        height: 400px !important;
     }
 
     #template-preview,
     #email-preview {
-        max-height: 400px;
+        min-height: 400px !important;
+        max-height: 400px !important;
+    }
+
+    .container-fluid {
+        padding-left: 10px;
+        padding-right: 10px;
     }
 }
 
-/* Smooth Transitions */
-* {
+/* Smooth Transitions - Remove Universal Selector */
+.btn, .card, .nav-link {
     transition: background-color 0.2s ease, border-color 0.2s ease;
 }
 
@@ -239,4 +333,27 @@ body {
 
 ::-webkit-scrollbar-thumb:hover {
     background: #555;
+}
+
+/* Email Preview Content */
+#template-preview .email-container,
+#email-preview .email-body {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* Ensure Full Width Usage */
+.tab-pane {
+    width: 100%;
+}
+
+/* Fix Row Gutters */
+.row {
+    margin-left: -12px;
+    margin-right: -12px;
+}
+
+.row > * {
+    padding-left: 12px;
+    padding-right: 12px;
 }

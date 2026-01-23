@@ -8,9 +8,6 @@ jinja2>=3.1.0
 # For Linux/Mac: python-email and eml format
 pywin32>=305; platform_system == "Windows"
 
-# Alternative for cross-platform .msg handling
-msg-extractor>=0.42.0
-
 # Utilities
 colorama>=0.4.6
 tqdm>=4.65.0

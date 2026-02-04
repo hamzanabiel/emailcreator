@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Follow Up</title>
+</head>
+<body style="margin:0;padding:0;background-color:#f4f4f4;font-family:Arial,Helvetica,sans-serif;">
+
+<table width="600" cellpadding="0" cellspacing="0" align="center" style="background-color:#ffffff;margin:20px auto;border:1px solid #dddddd;">
+
+    <!-- Header -->
+    <tr>
+        <td bgcolor="#0066cc" style="padding:28px 20px;text-align:center;">
+            <span style="color:#ffffff;font-size:22px;font-weight:bold;letter-spacing:1px;">{{ company_name }}</span>
+        </td>
+    </tr>
+
+    <!-- Body -->
+    <tr>
+        <td style="padding:30px;">
+
+            <p style="margin:0 0 18px 0;font-size:15px;color:#333333;line-height:1.5;">
+                Dear {{ recipient_name or 'Valued Customer' }},
+            </p>
+
+            <p style="margin:0 0 18px 0;font-size:15px;color:#333333;line-height:1.5;">
+                This is a follow-up regarding the outstanding invoice for <strong>{{ entity_name }}</strong>.
+                We wanted to check in and ensure everything is in order on your end.
+            </p>
+
+            {% if custom_message %}
+            <table width="100%" cellpadding="0" cellspacing="0" style="margin:18px 0;">
+                <tr>
+                    <td bgcolor="#fff9e6" style="padding:14px 16px;border-left:4px solid #ffc107;">
+                        <p style="margin:0;font-size:14px;color:#333333;line-height:1.5;">{{ custom_message }}</p>
+                    </td>
+                </tr>
+            </table>
+            {% endif %}
+
+            <!-- Details Table -->
+            <table width="100%" cellpadding="0" cellspacing="0" style="margin:22px 0;border-collapse:collapse;">
+                <tr>
+                    <td bgcolor="#f0f7ff" style="padding:10px 14px;border:1px solid #dddddd;width:40%;">
+                        <strong style="color:#0066cc;font-size:13px;">Detail</strong>
+                    </td>
+                    <td bgcolor="#f0f7ff" style="padding:10px 14px;border:1px solid #dddddd;">
+                        <strong style="color:#0066cc;font-size:13px;">Information</strong>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="padding:10px 14px;border:1px solid #dddddd;color:#666666;font-size:14px;">Entity Name</td>
+                    <td style="padding:10px 14px;border:1px solid #dddddd;font-size:14px;">{{ entity_name }}</td>
+                </tr>
+                <tr>
+                    <td style="padding:10px 14px;border:1px solid #dddddd;color:#666666;font-size:14px;">Invoice Number</td>
+                    <td style="padding:10px 14px;border:1px solid #dddddd;font-size:14px;">{{ invoice_number }}</td>
+                </tr>
+                {% if amount %}
+                <tr>
+                    <td style="padding:10px 14px;border:1px solid #dddddd;color:#666666;font-size:14px;">Amount Due</td>
+                    <td style="padding:10px 14px;border:1px solid #dddddd;font-size:14px;font-weight:bold;color:#d9534f;">${{ amount }}</td>
+                </tr>
+                {% endif %}
+                {% if due_date %}
+                <tr>
+                    <td style="padding:10px 14px;border:1px solid #dddddd;color:#666666;font-size:14px;">Due Date</td>
+                    <td style="padding:10px 14px;border:1px solid #dddddd;font-size:14px;">{{ due_date }}</td>
+                </tr>
+                {% endif %}
+            </table>
+
+            <!-- CTA Link (only renders if a link is provided) -->
+            {% if link %}
+            <table width="100%" cellpadding="0" cellspacing="0" style="margin:24px 0;">
+                <tr>
+                    <td style="text-align:center;">
+                        <a href="{{ link }}" style="display:inline-block;padding:12px 32px;background-color:#0066cc;color:#ffffff;text-decoration:none;font-size:15px;font-weight:bold;">View Invoice</a>
+                    </td>
+                </tr>
+            </table>
+            {% endif %}
+
+            <p style="margin:22px 0 10px 0;font-size:15px;color:#333333;line-height:1.5;">
+                Please do not hesitate to reach out if you have any questions or require further details.
+            </p>
+
+            <p style="margin:0;font-size:15px;color:#333333;line-height:1.8;">
+                Kind regards,<br>
+                <strong>{{ sender_name }}</strong><br>
+                {{ sender_title }}<br>
+                {{ company_name }}
+            </p>
+
+        </td>
+    </tr>
+
+    <!-- Footer -->
+    <tr>
+        <td bgcolor="#f9f9f9" style="padding:18px 30px;border-top:1px solid #eeeeee;text-align:center;">
+            <p style="margin:4px 0;font-size:12px;color:#666666;"><strong>{{ company_name }}</strong></p>
+            <p style="margin:4px 0;font-size:11px;color:#999999;">This is an automated message. Please do not reply directly to this email.</p>
+            <p style="margin:4px 0;font-size:11px;color:#999999;">© {{ current_year }} {{ company_name }}. All rights reserved.</p>
+        </td>
+    </tr>
+
+</table>
+
+</body>
+</html>

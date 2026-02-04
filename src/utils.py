@@ -75,16 +75,27 @@ class EmailGrouper:
         entity_name = str(row.get(self.csv_columns.get('entity_name', ''), ''))
         invoice_number = str(row.get(self.csv_columns.get('invoice_number', ''), ''))
 
-        # Get subject line (use custom if provided, otherwise generate)
+        # Determine email type (invoice or followup)
+        email_type_col = self.csv_columns.get('email_type')
+        email_type = str(row.get(email_type_col, '')).strip().lower() if email_type_col else 'invoice'
+        if email_type not in ('invoice', 'followup'):
+            email_type = 'invoice'
+
+        # Get subject line (use custom if provided, otherwise generate based on type)
         subject_col = self.csv_columns.get('subject')
         if subject_col and row.get(subject_col):
             subject = str(row[subject_col])
+        elif email_type == 'followup':
+            subject = self._format_followup_subject(entity_name, invoice_number)
         else:
-            # Generate subject: "EntityName Invoice 0001"
             subject = self._format_single_subject(entity_name, invoice_number)
 
         # Parse attachment path
         attachments = self._parse_attachments(row)
+
+        # Get optional link field
+        link_col = self.csv_columns.get('link')
+        link = str(row.get(link_col, '')).strip() if link_col else ''
 
         return {
             'type': 'single',
@@ -98,7 +109,9 @@ class EmailGrouper:
             'due_date': str(row.get(self.csv_columns.get('due_date', ''), '')),
             'custom_message': str(row.get(self.csv_columns.get('custom_message', ''), '')),
             'attachments': attachments,
-            'is_group': False
+            'is_group': False,
+            'email_type': email_type,
+            'link': link
         }
 
     def _create_group_email(self, group_name: str, group_data: pd.DataFrame) -> Dict[str, Any]:
@@ -140,6 +153,16 @@ class EmailGrouper:
             attachments = self._parse_attachments(row)
             all_attachments.extend(attachments)
 
+        # Determine email type from first row
+        email_type_col = self.csv_columns.get('email_type')
+        email_type = str(first_row.get(email_type_col, '')).strip().lower() if email_type_col else 'invoice'
+        if email_type not in ('invoice', 'followup'):
+            email_type = 'invoice'
+
+        # Get optional link field from first row
+        link_col = self.csv_columns.get('link')
+        link = str(first_row.get(link_col, '')).strip() if link_col else ''
+
         return {
             'type': 'group',
             'to': self._get_email_field(first_row, 'to'),
@@ -150,7 +173,9 @@ class EmailGrouper:
             'invoices': invoices,
             'custom_message': str(first_row.get(self.csv_columns.get('custom_message', ''), '')),
             'attachments': all_attachments,
-            'is_group': True
+            'is_group': True,
+            'email_type': email_type,
+            'link': link
         }
 
     def _format_single_subject(self, entity_name: str, invoice_number: str) -> str:
@@ -165,6 +190,20 @@ class EmailGrouper:
             Formatted subject line
         """
         template = self.config.get('email', {}).get('subject_single', '{entity_name} Invoice {invoice_number}')
+        return template.format(entity_name=entity_name, invoice_number=invoice_number)
+
+    def _format_followup_subject(self, entity_name: str, invoice_number: str) -> str:
+        """
+        Format subject line for follow-up email.
+
+        Args:
+            entity_name: Entity name
+            invoice_number: Invoice number
+
+        Returns:
+            Formatted subject line
+        """
+        template = self.config.get('email', {}).get('subject_followup', 'Follow Up: {entity_name} Invoice {invoice_number}')
         return template.format(entity_name=entity_name, invoice_number=invoice_number)
 
     def _format_group_subject(self, group_name: str, invoice_numbers: List[str]) -> str:

@@ -27,16 +27,25 @@ class EmailGenerator:
         """
         self.config = config
         self.template_path = config.get('paths', {}).get('template', 'config/template.html')
+        self.template_followup_path = config.get('paths', {}).get('template_followup', 'config/template_followup.html')
         self.output_dir = Path(config.get('paths', {}).get('output', 'output'))
         self.attachment_base = config.get('paths', {}).get('attachment_base', '')
 
-        # Initialize Jinja2 environment
+        # Initialize Jinja2 environment - both templates must be in same directory
         template_file = Path(self.template_path)
         template_dir = template_file.parent
-        template_name = template_file.name
 
         self.jinja_env = Environment(loader=FileSystemLoader(str(template_dir)))
-        self.template = self.jinja_env.get_template(template_name)
+        self.template = self.jinja_env.get_template(template_file.name)
+
+        # Load follow-up template if it exists
+        followup_file = Path(self.template_followup_path)
+        if followup_file.exists():
+            self.template_followup = self.jinja_env.get_template(followup_file.name)
+            logger.info(f"Follow-up template loaded: {followup_file.name}")
+        else:
+            self.template_followup = None
+            logger.warning(f"Follow-up template not found: {self.template_followup_path}")
 
         # Initialize email file creator
         self.email_creator = EmailFileCreator(config)
@@ -90,6 +99,13 @@ class EmailGenerator:
         Returns:
             Rendered HTML string
         """
+        # Select template based on email_type
+        email_type = email_data.get('email_type', 'invoice').strip().lower()
+        if email_type == 'followup' and self.template_followup:
+            template = self.template_followup
+        else:
+            template = self.template
+
         # Prepare template context
         context = {
             'company_name': self.config.get('company', {}).get('name', 'Your Company'),
@@ -100,10 +116,15 @@ class EmailGenerator:
             'custom_message': email_data.get('custom_message', ''),
         }
 
-        # Add banner path if exists
-        banner_path = self.config.get('paths', {}).get('banner')
-        if banner_path and Path(banner_path).exists():
-            context['banner_path'] = banner_path
+        # Add banner path if exists (invoice template only)
+        if email_type != 'followup':
+            banner_path = self.config.get('paths', {}).get('banner')
+            if banner_path and Path(banner_path).exists():
+                context['banner_path'] = banner_path
+
+        # Add link for follow-up emails
+        if email_data.get('link'):
+            context['link'] = email_data['link']
 
         # Add attachments list (filenames only)
         attachments = email_data.get('attachments', [])
@@ -127,7 +148,7 @@ class EmailGenerator:
             })
 
         # Render template
-        return self.template.render(**context)
+        return template.render(**context)
 
     def _resolve_attachments(self, attachment_list: List[str]) -> List[Path]:
         """

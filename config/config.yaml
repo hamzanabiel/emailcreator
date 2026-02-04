@@ -9,14 +9,17 @@ csv_columns:
   cc: CC
   custom_message: Custom Message
   due_date: Due Date
+  email_type: Email Type
   entity_name: Entity Name
   group: Group
   invoice_number: Invoice Number
+  link: Link
   subject: Subject
   to: To
 email:
   format: auto
   from: hamzanabiel@gmail.com
+  subject_followup: 'Follow Up: {entity_name} Invoice {invoice_number}'
   subject_group: '{group_name} Invoices {invoice_numbers}'
   subject_single: '{entity_name} Invoice {invoice_number}'
 grouping:
@@ -36,6 +39,7 @@ paths:
   banner: config/banner.png
   output: output
   template: config/template.html
+  template_followup: config/template_followup.html
 validation:
   check_attachments: true
   validate_emails: true
